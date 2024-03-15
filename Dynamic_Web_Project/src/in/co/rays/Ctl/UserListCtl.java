@@ -22,7 +22,7 @@ public class UserListCtl  extends HttpServlet{
 		UserModel model = new UserModel();
 		
 		try {
-			List list= model.search(null, 1, 5);
+			List list= model.search(null, 1, 0);
 			req.setAttribute("list", list);
 			RequestDispatcher rd= req.getRequestDispatcher("UserListView.jsp");
 			rd.forward(req, resp);
@@ -59,7 +59,7 @@ public class UserListCtl  extends HttpServlet{
 			UserModel model = new UserModel();
 			
 			try {
-				List list= model.search(null, 1, 0);
+				List list= model.search(bean, 1, 0);
 				req.setAttribute("list", list);
 				RequestDispatcher rd= req.getRequestDispatcher("UserListView.jsp");
 				rd.forward(req, resp);
