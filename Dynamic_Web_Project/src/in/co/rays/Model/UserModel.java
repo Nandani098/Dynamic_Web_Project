@@ -31,7 +31,7 @@ public class UserModel {
 
 	public void add(UserBean bean) throws Exception {
 		
-		int  pk = nextpk();
+//		int  pk = nextpk();
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -40,7 +40,9 @@ public class UserModel {
 		PreparedStatement ps = conn.prepareStatement("insert into user values(?, ?, ?, ?, ?, ?, ?)");
 		
 		
-		ps.setInt(1, pk);
+	//	ps.setInt(1, pk); ye // isliye kuki udhr id get update m dikkt arih..id add krethe to last m jarithi 
+		//view page dynamic m
+		ps.setInt(1, bean.getId());
 		ps.setString(2, bean.getFirstName());
 		ps.setString(3, bean.getLastName());
 		ps.setString(4, bean.getLoginId());
@@ -60,7 +62,7 @@ public class UserModel {
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nandani", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement(
-				"update user set first_name = ?, last_name = ?, login_id = ?, password = ?, dob = ?, address = ? where id = ?");
+				"update user set first_name = ?, last_name = ?, login_Id = ?, password = ?, dob = ?, address = ? where id = ?");
 	     
 		ps.setString(1, bean.getFirstName());
 		ps.setString(2, bean.getLastName());
@@ -162,6 +164,10 @@ public class UserModel {
 
 			if (bean.getFirstName() != null && bean.getFirstName().length() > 0) {
 				sql.append(" and first_name like '" + bean.getFirstName() + "%'");
+			}
+			if(bean.getDob() != null && bean.getDob().getTime()>0) {
+				
+				sql.append(" and dob like  '" + new java.sql.Date(bean.getDob().getTime())+ "%'");
 			}
 
 		}

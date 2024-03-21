@@ -46,8 +46,22 @@ public class LoginCtl extends HttpServlet {
 
 		String login = req.getParameter("loginId");
 		String pass = req.getParameter("password");
+		String uri =req.getParameter("uri");
 
 		UserModel model = new UserModel();
+		
+		if (login.equals("") || pass.equals("")) {
+			
+			if(login.equals("")) {	
+			req.setAttribute("login", "your login id is required");
+			}
+			if(pass.equals("")) {
+	        req.setAttribute("pass", "your pass is req");		
+			} 
+			RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+			
+			rd.forward(req, resp);
+		}else {
 
 		try {
 			UserBean bean = model.authenticate(login, pass);
@@ -60,12 +74,20 @@ public class LoginCtl extends HttpServlet {
 //			    rd.forward(req, resp);
 
 				// create session method
+				
+			
 
 				HttpSession session = req.getSession();
 
 				session.setAttribute("user", bean);
 
-				resp.sendRedirect("Welcome1.jsp");
+				if(uri.equalsIgnoreCase("null")) {
+					
+					resp.sendRedirect("Welcome1.jsp");
+				}else {
+					
+					resp.sendRedirect(uri);
+				}
 
 			} else {
 
@@ -81,3 +103,4 @@ public class LoginCtl extends HttpServlet {
 
 	}
 }
+	}

@@ -11,6 +11,11 @@
 		
 <%
 		String msg = (String) request.getAttribute("msg");
+		
+		String uri = (String) request.getAttribute("uri");
+		
+		String login =(String)request.getAttribute("login");
+String pass	=(String)request.getAttribute("pass");
 	%>
    
    <%@include file="Header.jsp" %>
@@ -25,21 +30,37 @@
 		<%
 			}
 		%>
+	<%-- 	
+		<% if(uri != null){%>
+		
+		<%=uri %>
+		<%} %> --%>
 
 		<table>
 			<tr>
 				<th>Login ID :</th>
 				<td><input type="text" name="loginId"></td>
+				<td> <% if(login != null){%>
+				
+				<%=login %>
+				
+				<%} %> </td>
 			</tr>
 			<tr>
 				<th>Password :</th>
 				<td><input type="text" name="password"></td>
+					<td> <% if(pass != null){%>
+				
+				<%=pass %>
+				
+				<%} %> </td>
 			</tr>
 			<tr>
 				<th></th>
 				<td><input type="submit"></td>
 			</tr>
 		</table>
+		<input type ="text" name =  "uri" value=<%=uri %>>
 	</form>
 </body>
 </html>

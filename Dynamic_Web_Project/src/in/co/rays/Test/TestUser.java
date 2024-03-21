@@ -117,6 +117,8 @@ public class TestUser {
 
 		UserBean bean = new UserBean();
 
+		//ab id set krvana pdega kuki hmhe view p data add to isliye niche ek add horih id ka
+		bean.setId(1);
 		bean.setFirstName("xyz");
 		bean.setLastName("abc");
 		bean.setLoginId("xyz@gmail.com");
